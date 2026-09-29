@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accuprint Las Vegas - Premium Print Atelier Since 1985</title>
+<meta name="description" content="Las Vegas premium printing - Business Cards, Brochures, Packaging, Signage, Invitations. 40+ years, 24h turnaround.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html.lenis,html.lenis body{height:auto}
+  body{font-family:'Inter',sans-serif;background:#F8F5F0;color:#1A1A1A;overflow-x:hidden}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:300}
+  header{position:fixed;top:0;width:100%;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);color:white;transition:transform 0.5s ease}
+  @media(min-width:900px){header{padding:20px 48px}}
+  .hero{max-width:1600px;margin:0 auto;padding:90px 20px 40px;display:grid;grid-template-columns:1fr;gap:30px}
+  @media(min-width:900px){.hero{padding:140px 48px 80px;grid-template-columns:1fr 1fr;gap:60px;min-height:90vh}}
+  .hero h1{font-size:42px;line-height:0.9} @media(min-width:900px){.hero h1{font-size:86px}}
+  .hero-img{height:420px;overflow:hidden;position:relative} @media(min-width:900px){.hero-img{height:700px}}
+  .hero-img img{width:100%;height:100%;object-fit:cover}
+  .gold{color:#B08D57}
+  .btn-black{background:#0A0A0A;color:white;padding:14px 22px;font-size:11px;letter-spacing:0.2em;border:none;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;transition:0.3s}
+  .btn-line{border:1px solid black;padding:14px 22px;font-size:11px;letter-spacing:0.2em;background:transparent;cursor:pointer;text-decoration:none;color:black;display:inline-flex;justify-content:center;transition:0.3s}
+  .btn-black:hover{background:#B08D57;transform:translateY(-2px)} .btn-line:hover{background:black;color:white}
+  .section{max-width:1600px;margin:0 auto;padding:50px 20px} @media(min-width:900px){.section{padding:80px 48px}}
+  .grid4{display:grid;grid-template-columns:1fr;gap:16px;margin-top:30px} @media(min-width:600px){.grid4{grid-template-columns:repeat(2,1fr)}} @media(min-width:1100px){.grid4{grid-template-columns:repeat(4,1fr)}}
+  .grid3{display:grid;grid-template-columns:1fr;gap:20px} @media(min-width:900px){.grid3{grid-template-columns:repeat(3,1fr)}}
+  .card{background:white;padding:16px 16px 24px;border:1px solid transparent;transition:0.4s;cursor:pointer;display:block;color:inherit;text-decoration:none}
+  .card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.08);border-color:rgba(176,141,87,0.2)}
+  .card div{height:260px;overflow:hidden} @media(min-width:900px){.card div{height:280px}}
+  .card img{width:100%;height:100%;object-fit:cover;transition:0.8s} .card:hover img{transform:scale(1.07)}
+  .marquee{background:#0A0A0A;color:rgba(255,255,255,0.6);padding:14px 0;overflow:hidden;white-space:nowrap;font-size:11px;letter-spacing:0.3em}
+  .marquee span{display:inline-block;animation:marquee 20s linear infinite} @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .panel{position:fixed;top:0;right:0;width:100vw;height:100vh;z-index:99;background:#F8F5F0;transform:translateX(100%);transition:0.6s cubic-bezier(0.77,0,0.175,1);overflow-y:auto;visibility:hidden} @media(min-width:600px){.panel{width:560px}}
+  .panel.show,.panel:target{transform:translateX(0);visibility:visible;box-shadow:-20px 0 60px rgba(0,0,0,0.2)}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);z-index:90;display:none} .overlay.show{display:block}
+  .panel-header{position:sticky;top:0;background:#F8F5F0;padding:20px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;align-items:center}
+  .close-btn{width:40px;height:40px;border-radius:50%;border:1px solid #ddd;background:white;display:grid;place-items:center;cursor:pointer;text-decoration:none;color:black}
+  .panel-content{padding:20px} @media(min-width:900px){.panel-content{padding:28px} .panel-header{padding:28px}}
+  .input{width:100%;padding:14px;border:1px solid #ddd;background:white;font-size:16px;margin-top:8px} @media(min-width:900px){.input{font-size:13px}}
+  .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer} .hamburger span{width:22px;height:1.5px;background:white;display:block}
+  @media(min-width:900px){.hamburger{display:none}} .desktop-nav{display:none} @media(min-width:900px){.desktop-nav{display:flex;gap:28px;font-size:11px;letter-spacing:0.2em}}
+  .mobile-nav{position:fixed;inset:0;z-index:60;background:#0A0A0A;color:white;padding:100px 30px 40px;transform:translateX(100%);transition:0.5s;display:flex;flex-direction:column;gap:28px}
+  .mobile-nav.open{transform:translateX(0)} .mobile-nav a{font-size:32px;font-family:'Cormorant Garamond',serif}
+</style>
+</head>
+<body>
+
+<script>
+ // --- Lenis Smooth Scroll ---
+ const lenis = new Lenis();
+ function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+ requestAnimationFrame(raf);
+
+ // --- GSAP Hero Anim ---
+ if(window.gsap){
+   gsap.registerPlugin(ScrollTrigger);
+   gsap.from(".hero-anim", { y: 30, opacity: 0, duration: 0.8, stagger: 0.12, ease: "power3.out", delay: 0.2 });
+ }
+
+ // --- Mobile Menu ---
+ function toggleMobile(){
+   const nav = document.getElementById('mobileNav');
+   nav.classList.toggle('open');
+   // lock scroll when open
+   if(nav.classList.contains('open')){
+     document.body.style.overflow = 'hidden';
+   } else {
+     document.body.style.overflow = '';
+   }
+ }
+ function closeMobile(){
+   document.getElementById('mobileNav').classList.remove('open');
+   // don't unlock if a panel is still open
+   if(!document.querySelector('.panel.show')){
+     document.body.style.overflow = '';
+   }
+ }
+
+ // --- Panels / Quote ---
+ function openPanel(id){
+   closeMobile();
+   const panel = document.getElementById(id);
+   const overlay = document.getElementById('overlay');
+   if(!panel) return;
+   overlay.classList.add('show');
+   panel.classList.add('show');
+   document.body.style.overflow = 'hidden';
+   // update url without jumping
+   history.pushState(null, null, '#' + id);
+ }
+
+ function closePanel(){
+   document.querySelectorAll('.panel').forEach(p => p.classList.remove('show'));
+   document.getElementById('overlay').classList.remove('show');
+   document.body.style.overflow = '';
+   closeMobile();
+   if(location.hash) history.pushState(null, null, window.location.pathname);
+ }
+
+ function quoteFor(service){
+   closePanel();
+   setTimeout(() => {
+     const sel = document.getElementById('q-service');
+     if(sel) sel.value = service;
+     openPanel('panel-quote');
+   }, 350);
+ }
+
+ function submitQuote(e){
+   e.preventDefault();
+   alert('Thank you! We will send your quote within 2 hours.');
+   closePanel();
+   e.target.reset();
+ }
+
+ // Close on ESC and overlay click
+ document.addEventListener('keydown', (e) => {
+   if(e.key === 'Escape'){ closePanel(); closeMobile(); }
+ });
+ 
+ // Fix header hide on scroll if you add it later
+ let lastScroll = 0;
+ window.addEventListener('scroll', () => {
+   const header = document.querySelector('header');
+   const current = window.scrollY;
+   if(current > lastScroll && current > 100) header.style.transform = 'translateY(-100%)';
+   else header.style.transform = 'translateY(0)';
+   lastScroll = current;
+ });
+</script>
+
+
+<header>
+  <div style="letter-spacing:0.2em;font-size:18px">ACCUPRINT<span class="gold">.</span></div>
+  <nav class="desktop-nav"><a href="#services">SERVICES</a><a href="#work">WORK</a><a href="#process">PROCESS</a><a href="#about">ABOUT</a><a href="#contact">CONTACT</a></nav>
+  <div style="display:flex;gap:14px;align-items:center">
+    <a href="#panel-quote" onclick="openPanel('panel-quote');return false" style="background:white;color:black;padding:11px 18px;font-size:11px;letter-spacing:0.2em;text-decoration:none">GET QUOTE</a>
+    <button class="hamburger" onclick="toggleMobile()" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div id="mobileNav" class="mobile-nav">
+  <a href="#services" onclick="toggleMobile()">Services</a><a href="#work" onclick="toggleMobile()">Work</a><a href="#process" onclick="toggleMobile()">Process</a><a href="#about" onclick="toggleMobile()">About</a><a href="#contact" onclick="toggleMobile()">Contact</a>
+  <a href="#panel-quote" onclick="toggleMobile();openPanel('panel-quote');return false" style="background:white;color:black;padding:16px;text-align:center;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:0.2em;margin-top:10px">GET QUOTE →</a>
+  <button onclick="toggleMobile()" style="margin-top:auto;background:none;border:none;color:rgba(255,255,255,0.5);text-align:left;font-size:12px;letter-spacing:0.2em">✕ CLOSE</button>
+</div>
+<div id="overlay" class="overlay" onclick="closePanel()"></div>
+
+<section class="hero">
+  <div>
+    <p class="gold hero-anim" style="font-size:10px;letter-spacing:0.3em;margin-bottom:14px">PREMIUM PRINTING HOUSE — LAS VEGAS • SINCE 1985</p>
+    <h1 class="hero-anim">Print That<br><i>Defines Your</i><br>Brand.</h1>
+    <p class="hero-anim" style="color:#888;margin-top:18px;max-width:440px;line-height:1.7;font-size:14px">Quiet luxury for your business. Business cards, brochures, packaging, signage & invitations that feels as premium as your brand. 50K+ clients, 24h turnaround.</p>
+    <div class="hero-anim" style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
+      <a href="#panel-work" onclick="openPanel('panel-work');return false" class="btn-black" style="flex:1">VIEW WORK</a>
+      <a href="#services" class="btn-line" style="flex:1">OUR SERVICES</a>
+    </div>
+    <div class="hero-anim" style="display:flex;gap:24px;margin-top:28px;border-top:1px solid rgba(0,0,0,0.1);padding-top:16px">
+      <div><h3 style="font-size:26px">50K+</h3><p style="font-size:10px;color:#999;letter-spacing:0.15em">CLIENTS</p></div>
+      <div><h3 style="font-size:26px">40+</h3><p style="font-size:10px;color:#999;letter-spacing:0.15em">YEARS</p></div>
+      <div><h3 style="font-size:26px">24H</h3><p style="font-size:10px;color:#999;letter-spacing:0.15em">TURNAROUND</p></div>
+    </div>
+  </div>
+  <div class="hero-img hero-anim">
+    <img id="hero-image" src="https://iili.io/nYjWw8v.md.png"/file/d/1Tk8T_fLIp9aQTdgvRqFbxZZv4bx7WWSF/view?usp=drive_link" alt="Foil Pressed Business Cards" loading="eager" crossorigin="anonymous">
+    <div style="position:absolute;bottom:14px;left:14px;background:white;padding:16px;max-width:85%">
+      <p class="gold" style="font-size:10px;letter-spacing:0.2em">FEATURED</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:16px;margin-top:6px">Foil Pressed Business Cards with Soft-Touch Lamination</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee"><span>BUSINESS CARDS • BROCHURES • PACKAGING • SIGNAGE • INVITATIONS • LETTERHEADS • MENUS • STICKERS • &nbsp;</span></div>
+
+<section id="services" class="section">
+  <p class="gold" style="font-size:11px;letter-spacing:0.3em">WHAT WE DO — FULL SERVICE</p>
+  <h2 style="font-size:36px;margin-top:6px">Our Expertise</h2>
+  <p style="color:#888;font-size:13px;margin-top:6px">Click any card — public CDN images work for anyone you send the link to.</p>
+  <div class="grid4" id="work">
+   <a href="#panel-1" onclick="openPanel('panel-1');return false" class="card"><div><img src="https://iili.io/nYjfZ0v.jpg" alt="Business Cards" loading="lazy" crossorigin="anonymous"></div><p class="gold" style="font-size:11px;margin-top:14px">01</p><h3 style="font-size:22px">Business Cards</h3><p style="font-size:13px;color:#888">Foil, emboss, soft-touch</p></a>
+
+<a href="#panel-2" onclick="openPanel('panel-2');return false" class="card"><div><img src="https://iili.io/nYjfssa.jpg" alt="Brochures" loading="lazy" crossorigin="anonymous"></div><p class="gold" style="font-size:11px;margin-top:14px">02</p><h3 style="font-size:22px">Brochures & Catalogs</h3><p style="font-size:13px;color:#888">Editorial & luxury finish</p></a>
+
+<a href="#panel-3" onclick="openPanel('panel-3');return false" class="card"><div><img src="https://iili.io/nYjf4b1.jpg" alt="Packaging" loading="lazy" crossorigin="anonymous"></div><p class="gold" style="font-size:11px;margin-top:14px">03</p><h3 style="font-size:22px">Packaging</h3><p style="font-size:13px;color:#888">Rigid boxes, unboxing</p></a>
+
+<a href="#panel-4" onclick="openPanel('panel-4');return false" class="card"><div><img src="https://iili.io/nYjfQqJ.jpg" alt="Large Format" loading="lazy" crossorigin="anonymous"></div><p class="gold" style="font-size:11px;margin-top:14px">04</p><h3 style="font-size:22px">Large Format</h3><p style="font-size:13px;color:#888">Signage & displays</p></a>
+
+<a href="#panel-5" onclick="openPanel('panel-5');return false" class="card"><div><img src="https://iili.io/nYjftgR.jpg" alt="Invitations" loading="lazy" crossorigin="anonymous"></div><p class="gold" style="font-size:11px;margin-top:14px">05</p><h3 style="font-size:22px">Invitations</h3><p style="font-size:13px;color:#888">Wedding & luxury events</p></a>
+
+<a href="#panel-6" onclick="openPanel('panel-6');return false" class="card"><div><img src="https://iili.io/nYjfbJp.jpg" alt="Letterheads" loading="lazy" crossorigin="anonymous"></div><p class="gold" style="font-size:11px;margin-top:14px">06</p><h3 style="font-size:22px">Letterheads</h3><p style="font-size:13px;color:#888">Stationery suites</p></a>
+
+<a href="#panel-7" onclick="openPanel('panel-7');return false" class="card"><div><img src="https://iili.io/nYjfpeI.jpg" alt="Menus" loading="lazy" crossorigin="anonymous"></div><p class="gold" style="font-size:11px;margin-top:14px">07</p><h3 style="font-size:22px">Menus & Lookbooks</h3><p style="font-size:13px;color:#888">Restaurants & hotels</p></a>
+
+<a href="#panel-8" onclick="openPanel('panel-8');return false" class="card"><div><img src="https://iili.io/nYjfm5N.jpg" alt="Stickers" loading="lazy" crossorigin="anonymous"></div><p class="gold" style="font-size:11px;margin-top:14px">08</p><h3 style="font-size:22px">Stickers & Labels</h3><p style="font-size:13px;color:#888">Foil, waterproof</p></a>
+  </div>
+</section>
+
+<section id="process" class="section" style="background:white;max-width:100%">
+  <div style="max-width:1600px;margin:0 auto">
+    <p class="gold" style="font-size:11px;letter-spacing:0.3em;text-align:center">HOW IT WORKS</p>
+    <h2 style="font-size:36px;text-align:center;margin-top:8px">From Idea to Delivery in 24H</h2>
+    <div class="grid4" style="margin-top:40px">
+      <div style="text-align:center;padding:20px"><p class="gold" style="font-size:32px">01</p><h3 style="font-size:20px;margin-top:10px">Quote</h3><p style="font-size:13px;color:#888;margin-top:8px">Send artwork, get price in 2 hours. Free proof.</p></div>
+      <div style="text-align:center;padding:20px"><p class="gold" style="font-size:32px">02</p><h3 style="font-size:20px;margin-top:10px">Proof</h3><p style="font-size:13px;color:#888;margin-top:8px">Digital proof for approval. We check bleed & foil.</p></div>
+      <div style="text-align:center;padding:20px"><p class="gold" style="font-size:32px">03</p><h3 style="font-size:20px;margin-top:10px">Print</h3><p style="font-size:13px;color:#888;margin-top:8px">Heidelberg press, hand-finished lamination.</p></div>
+      <div style="text-align:center;padding:20px"><p class="gold" style="font-size:32px">04</p><h3 style="font-size:20px;margin-top:10px">Deliver</h3><p style="font-size:13px;color:#888;margin-top:8px">Pickup in Vegas or shipped nationwide. 24H rush.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:#0A0A0A;color:white;padding:50px 20px;display:grid;grid-template-columns:1fr;gap:30px;max-width:1600px;margin:0 auto">
+  <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800" alt="Atelier" loading="lazy" crossorigin="anonymous" style="width:100%;height:380px;object-fit:cover">
+  <div>
+    <p class="gold" style="font-size:11px;letter-spacing:0.3em">SINCE 1985 — LAS VEGAS</p>
+    <h2 style="font-size:36px;margin-top:12px;line-height:1">Craftsmanship<br><i>You Can Feel.</i></h2>
+    <p style="color:rgba(255,255,255,0.6);margin-top:16px;line-height:1.7;font-size:14px">We are not a print shop. We are a brand atelier. Trusted by Wynn, Bellagio & 500+ luxury brands. Every sheet inspected by hand.</p>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap"><a href="#panel-quote" onclick="openPanel('panel-quote');return false" class="btn-black" style="border:1px solid #B08D57">GET QUOTE</a><a href="#contact" class="btn-line" style="border-color:rgba(255,255,255,0.3);color:white">CONTACT US</a></div>
+  </div>
+</section>
+
+<section id="contact" class="section" style="background:#F8F5F0">
+  <div class="grid3">
+    <div style="background:white;padding:24px;border:1px solid #eee"><p class="gold" style="font-size:11px;letter-spacing:0.2em">VISIT US</p><p style="margin-top:10px;line-height:1.6;font-size:14px">Accuprint Las Vegas<br>1234 S Las Vegas Blvd<br>Las Vegas, NV 89104</p><p style="margin-top:12px;font-size:13px;color:#888">Mon-Fri 8am-6pm • Sat 9am-2pm</p></div>
+    <div style="background:white;padding:24px;border:1px solid #eee"><p class="gold" style="font-size:11px;letter-spacing:0.2em">CONTACT</p><p style="margin-top:10px;font-size:14px">hello@accuprintlv.com<br>(702) 555-0123</p><a href="#panel-quote" onclick="openPanel('panel-quote');return false" class="btn-black" style="margin-top:16px;width:100%">REQUEST QUOTE</a></div>
+    <div style="background:#0A0A0A;color:white;padding:24px"><p class="gold" style="font-size:11px;letter-spacing:0.2em">WHY ACCUPRINT</p><ul style="margin-top:12px;font-size:13px;line-height:2;list-style:none"><li>✓ Free file check & proof</li><li>✓ Foil, emboss, soft-touch in-house</li><li>✓ 24H rush available</li><li>✓ Nationwide shipping</li></ul></div>
+  </div>
+</section>
+
+<footer style="text-align:center;padding:40px 20px;background:#0A0A0A;color:white">
+  <h2 style="font-size:24px;letter-spacing:0.2em">ACCUPRINT</h2>
+  <p class="gold" style="font-size:11px;letter-spacing:0.3em;margin-top:6px">LAS VEGAS PRINT ATELIER • SINCE 1985</p>
+  <p style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:20px">© 2025 Accuprint Las Vegas • Images via public Unsplash CDN</p>
+</footer>
+<!-- PANELS - ALL 8 SERVICES -->
+<div id="panel-quote" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">GET STARTED</p><h3 style="font-size:28px">Get a Quote</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><form onsubmit="submitQuote(event)" style="display:grid;gap:14px"><input required class="input" placeholder="Full Name"><input required type="email" class="input" placeholder="Email"><select id="q-service" class="input"><option>Business Cards</option><option>Brochures</option><option>Packaging</option><option>Large Format</option><option>Invitations</option><option>Letterheads</option><option>Menus</option><option>Stickers</option></select><textarea rows="4" class="input" placeholder="Quantity, paper, finish, deadline..."></textarea><button class="btn-black" style="width:100%">REQUEST QUOTE →</button></form></div></div>
+
+<div id="panel-work" class="panel"><div class="panel-header"><h3>Selected Work</h3><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><img src="https://iili.io/nYjfZ0v.jpg" style="height:180px;object-fit:cover"><img src="https://iili.io/nYjfssa.jpg" style="height:180px;object-fit:cover"><img src="https://iili.io/nYjf4b1.jpg" style="height:180px;object-fit:cover"><img src="https://iili.io/nYjfQqJ.jpg" style="height:180px;object-fit:cover"></div><button onclick="closePanel();setTimeout(()=>openPanel('panel-quote'),350)" class="btn-black" style="width:100%;margin-top:20px">GET QUOTE</button></div></div>
+
+<div id="panel-1" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">01</p><h3>Business Cards</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><img src="https://iili.io/nYjfZ0v.jpg" style="width:100%;height:240px;object-fit:cover"><p class="gold" style="margin-top:16px">From $89 / 250 pcs</p><p style="margin-top:10px;color:#555;font-size:14px">16pt-32pt, foil, spot UV, emboss, soft-touch & painted edges. Free proof.</p><button onclick="quoteFor('Business Cards')" class="btn-black" style="width:100%;margin-top:20px">QUOTE FOR BUSINESS CARDS →</button></div></div>
+
+<div id="panel-2" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">02</p><h3>Brochures</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><img src="https://iili.io/nYjfssa.jpg" style="width:100%;height:240px;object-fit:cover"><p class="gold" style="margin-top:16px">From $149 / 100 pcs</p><p style="margin-top:10px;color:#555;font-size:14px">Tri-fold, gatefold, perfect bound with luxury coatings.</p><button onclick="quoteFor('Brochures')" class="btn-black" style="width:100%;margin-top:20px">QUOTE FOR BROCHURES →</button></div></div>
+
+<div id="panel-3" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">03</p><h3>Packaging</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><img src="https://iili.io/nYjf4b1.jpg" style="width:100%;height:240px;object-fit:cover"><p class="gold" style="margin-top:16px">From $299 / 50 pcs</p><p style="margin-top:10px;color:#555;font-size:14px">Rigid boxes, magnetic closure, foil & custom inserts.</p><button onclick="quoteFor('Packaging')" class="btn-black" style="width:100%;margin-top:20px">QUOTE FOR PACKAGING →</button></div></div>
+
+<div id="panel-4" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">04</p><h3>Large Format</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><img src="https://iili.io/nYjfQqJ.jpg" style="width:100%;height:240px;object-fit:cover"><p class="gold" style="margin-top:16px">From $49</p><p style="margin-top:10px;color:#555;font-size:14px">Vinyl, fabric, foam board, backlit displays. Same-day.</p><button onclick="quoteFor('Large Format')" class="btn-black" style="width:100%;margin-top:20px">QUOTE FOR LARGE FORMAT →</button></div></div>
+
+<div id="panel-5" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">05</p><h3>Invitations</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><img src="https://iili.io/nYjftgR.jpg" style="width:100%;height:240px;object-fit:cover"><p class="gold" style="margin-top:16px">From $199 / 50 pcs</p><p style="margin-top:10px;color:#555;font-size:14px">Wedding, gala & corporate invitations with foil & letterpress.</p><button onclick="quoteFor('Invitations')" class="btn-black" style="width:100%;margin-top:20px">QUOTE FOR INVITATIONS →</button></div></div>
+
+<div id="panel-6" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">06</p><h3>Letterheads</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><img src="https://iili.io/nYjfbJp.jpg" style="width:100%;height:240px;object-fit:cover"><p class="gold" style="margin-top:16px">From $99 / 250 pcs</p><p style="margin-top:10px;color:#555;font-size:14px">Letterheads, envelopes, notepads with cotton & soft-touch.</p><button onclick="quoteFor('Letterheads')" class="btn-black" style="width:100%;margin-top:20px">QUOTE FOR LETTERHEADS →</button></div></div>
+
+<div id="panel-7" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">07</p><h3>Menus & Lookbooks</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><img src="https://iili.io/nYjfpeI.jpg" style="width:100%;height:240px;object-fit:cover"><p class="gold" style="margin-top:16px">From $179 / 50 pcs</p><p style="margin-top:10px;color:#555;font-size:14px">Restaurant menus, hotel lookbooks, fashion catalogs with soft-touch.</p><button onclick="quoteFor('Menus')" class="btn-black" style="width:100%;margin-top:20px">QUOTE FOR MENUS →</button></div></div>
+
+<div id="panel-8" class="panel"><div class="panel-header"><div><p class="gold" style="font-size:11px">08</p><h3>Stickers & Labels</h3></div><a href="#" class="close-btn" onclick="closePanel();return false">✕</a></div><div class="panel-content"><img src="https://iili.io/nYjfm5N.jpg" style="width:100%;height:240px;object-fit:cover"><p class="gold" style="margin-top:16px">From $49 / 250 pcs</p><p style="margin-top:10px;color:#555;font-size:14px">Kiss-cut, die-cut, foil, waterproof & holographic options.</p><button onclick="quoteFor('Stickers')" class="btn-black" style="width:100%;margin-top:20px">QUOTE FOR STICKERS →</button></div></div>
+<script>
